@@ -143,3 +143,6 @@ button:disabled {
 .flatpickr-calendar {
   background: #f5f5f5;
 }
+.error-circul {
+  background-image: url(../img/error-circul.svg);
+}
