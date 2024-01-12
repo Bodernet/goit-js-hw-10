@@ -23,3 +23,123 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
+
+* {
+  box-sizing: border-box;
+  font-family: Montserrat;
+}
+.nav-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+  padding-top: 10px;
+  padding-left: 20px;
+}
+
+.nav-link {
+  color: #2e2f42;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 400;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+  color: #747bff;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+section {
+  margin: 20px;
+}
+.full-timer {
+  margin: 12px 0 0 156px;
+}
+p {
+  padding-bottom: 8px;
+}
+.timer {
+  margin: 32px 0 52px;
+  display: flex;
+  gap: 24px;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+}
+.value {
+  color: #2e2f42;
+  font-size: 40px;
+  line-height: 1.2;
+  letter-spacing: 1.6px;
+  text-align: center;
+}
+.label {
+  color: #2e2f42;
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+input[type='text'],
+input[type='number'] {
+  font-family: inherit;
+  padding: 8px 16px;
+  color: #2e2f42;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.64px;
+  border-radius: 4px;
+  border: 1px solid #808080;
+  width: 272px;
+  outline: none;
+  margin-right: 8px;
+}
+input[type='text']:hover,
+input[type='number']:hover {
+  border: 1px solid #000;
+}
+input[type='active']:active,
+input[type='number']:active,
+input[type='active']:focus,
+input[type='number']:focus {
+  color: #000;
+  border: 1px solid #4e75ff;
+}
+input[type='text']:disabled,
+input[type='number']:disabled {
+  color: #808080;
+  background: #f5f5f5;
+}
+
+button {
+  color: #fff;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.64px;
+  border-radius: 8px;
+  background: #4e75ff;
+  padding: 8px 16px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+button:hover {
+  background: #6c8cff;
+}
+button:disabled {
+  color: #989898;
+  background: #cfcfcf;
+}
+.flatpickr-calendar {
+  background: #f5f5f5;
+}
