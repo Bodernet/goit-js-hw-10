@@ -147,3 +147,41 @@ button:disabled {
 .error-circul {
   background-image: url(../img/error-circul.svg);
 }
+/* форма завдання 2 */
+.ok-circul {
+  background-image: url(../img/ok-circul.svg);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 360px;
+}
+input[type='number'] {
+  width: 100%;
+  margin-right: 0;
+  margin-top: 8px;
+}
+
+fieldset {
+  border: 1px solid #808080;
+  border-radius: 6px;
+  width: 100%;
+  margin: 0;
+  padding: 24px 48px 12px;
+  display: flex;
+  gap: 48px;
+  justify-content: center;
+  align-items: center;
+}
+fieldset:hover,
+fieldset:focus-within {
+  border: 1px solid #000;
+}
+
+.radio-btn {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+}
