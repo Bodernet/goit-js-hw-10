@@ -39,14 +39,26 @@ form.addEventListener('submit', event => {
   form.reset();
 });
 
-const makePromise = ({ value, delay, state }) => {
+const makePromise = (delay, state) => {
   return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (state === 'fulfilled') {
-        resolve(value);
-      } else {
-        reject(value);
-      }
-    }, delay);
+    if (state === 'fulfilled' || state === 'rejected') {
+      setTimeout(() => {
+        if (state === 'fulfilled') {
+          resolve(value);
+        } else {
+          reject(value);
+        }
+      }, delay);
+    } else {
+      reject('Invalid state value');
+    }
   });
 };
+
+makePromise(2000, 'fulfilled')
+  .then(value => {
+    console.log(`Fulfilled promise in ${value} ms!`);
+  })
+  .catch(error => {
+    console.error(`Rejected promise in ${error} ms!`);
+  });

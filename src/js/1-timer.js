@@ -20,14 +20,18 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
+    clearInterval(timerInterval);
     if (selectedDates[0].getTime() > Date.now()) {
       userSelectedDate = selectedDates[0].getTime();
-
       timerRefs.startBtn.disabled = false;
       timerRefs.startBtn.classList.remove('disabled');
     } else {
+      userSelectedDate = 0; // Очистити вибрану дату
+      timerRefs.tDays.textContent = '00';
+      timerRefs.tHours.textContent = '00';
+      timerRefs.tMinutes.textContent = '00';
+      timerRefs.tSeconds.textContent = '00';
       iziToast.show({
-        class: 'error-circul',
         position: 'topRight',
         icon: 'error-circul',
         message: 'Please choose a date in the future!',
@@ -45,13 +49,13 @@ const options = {
 };
 
 flatpickr('#datetime-picker', options);
-
+let timerInterval;
 timerRefs.startBtn.addEventListener('click', elem => {
-  const timer = setInterval(() => {
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
     const dif = userSelectedDate - Date.now();
     const tValue = convertMs(dif);
     if (dif <= 0) {
-      clearInterval(timer);
     } else {
       timerRefs.tDays.textContent = addLeadingZero(tValue.days);
       timerRefs.tHours.textContent = addLeadingZero(tValue.hours);
