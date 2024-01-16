@@ -20,13 +20,13 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    clearInterval(timerInterval);
+    clearInterval(countdownInterval);
     if (selectedDates[0].getTime() > Date.now()) {
       userSelectedDate = selectedDates[0].getTime();
       timerRefs.startBtn.disabled = false;
       timerRefs.startBtn.classList.remove('disabled');
     } else {
-      userSelectedDate = 0; // Очистити вибрану дату
+      userSelectedDate = 0;
       timerRefs.tDays.textContent = '00';
       timerRefs.tHours.textContent = '00';
       timerRefs.tMinutes.textContent = '00';
@@ -49,14 +49,19 @@ const options = {
 };
 
 flatpickr('#datetime-picker', options);
-let timerInterval;
+let countdownInterval;
 timerRefs.startBtn.addEventListener('click', elem => {
-  clearInterval(timerInterval);
-  timerInterval = setInterval(() => {
+  clearInterval(countdownInterval);
+  countdownInterval = setInterval(() => {
     const dif = userSelectedDate - Date.now();
-    const tValue = convertMs(dif);
     if (dif <= 0) {
+      clearInterval(countdownInterval);
+      timerRefs.tDays.textContent = '00';
+      timerRefs.tHours.textContent = '00';
+      timerRefs.tMinutes.textContent = '00';
+      timerRefs.tSeconds.textContent = '00';
     } else {
+      const tValue = convertMs(dif);
       timerRefs.tDays.textContent = addLeadingZero(tValue.days);
       timerRefs.tHours.textContent = addLeadingZero(tValue.hours);
       timerRefs.tMinutes.textContent = addLeadingZero(tValue.minutes);
@@ -66,6 +71,9 @@ timerRefs.startBtn.addEventListener('click', elem => {
 });
 
 function convertMs(ms) {
+  if (ms < 0) {
+    return { days: '00', hours: '00', minutes: '00', seconds: '00' };
+  }
   // Number of milliseconds per unit of time
   const second = 1000;
   const minute = second * 60;

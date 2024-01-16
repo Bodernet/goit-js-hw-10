@@ -6,16 +6,16 @@ const form = document.querySelector('.form');
 
 form.addEventListener('submit', event => {
   event.preventDefault();
-  const delay = form.delay.value;
+  const delayInput = form.delay.value;
   const state = form.state.value;
 
-  makePromise({ value: delay, delay: delay, state: state })
+  makePromise({ value: delayInput, delay: delayInput, state: state })
     .then(value =>
       iziToast.show({
         class: 'ok-circul',
         position: 'topRight',
         icon: 'ok-circul',
-        message: `Fulfilled promise in ${delay} ms!`,
+        message: `Fulfilled promise in ${delayInput} ms!`,
         messageColor: '#fff',
         messageSize: '16px',
         backgroundColor: '#59A10D',
@@ -28,7 +28,7 @@ form.addEventListener('submit', event => {
         class: 'error-circul',
         position: 'topRight',
         icon: 'error-circul',
-        message: `Rejected promise in ${delay} ms!`,
+        message: `Rejected promise in ${delayInput} ms!`,
         messageColor: '#fff',
         messageSize: '16px',
         backgroundColor: '#EF4040',
@@ -39,26 +39,14 @@ form.addEventListener('submit', event => {
   form.reset();
 });
 
-const makePromise = (delay, state) => {
+const makePromise = ({ value, delay, state }) => {
   return new Promise((resolve, reject) => {
-    if (state === 'fulfilled' || state === 'rejected') {
-      setTimeout(() => {
-        if (state === 'fulfilled') {
-          resolve(value);
-        } else {
-          reject(value);
-        }
-      }, delay);
-    } else {
-      reject('Invalid state value');
-    }
+    setTimeout(() => {
+      if (state === 'fulfilled') {
+        resolve(value);
+      } else {
+        reject(value);
+      }
+    }, delay);
   });
 };
-
-makePromise(2000, 'fulfilled')
-  .then(value => {
-    console.log(`Fulfilled promise in ${value} ms!`);
-  })
-  .catch(error => {
-    console.error(`Rejected promise in ${error} ms!`);
-  });
